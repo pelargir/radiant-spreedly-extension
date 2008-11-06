@@ -1,0 +1,33 @@
+<% include_stylesheet 'admin/subscribers/subscribers' %>
+
+<h1>Subscribers</h1>
+
+<p>You can enter subscribers here, which will show up on the public side of your website.</p>
+
+<table cellspacing="0" cellpadding="0" border="0" class="index" id="subscribers">
+
+  <thead>
+    <tr>
+      <th class="subscriber">Subscriber</th>
+      <th class="modify">Modify</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%# @subscribers.each do |subscriber| %>
+    <% Subscriber.find(:all).each do |subscriber| %>
+      <tr class="node level-1">
+        <td class="subscriber">
+          <%# image('subscribers/subscriber') %>
+          <%= link_to subscriber.title, subscriber_edit_url(:id => subscriber.id) %>
+        </td>
+        <td class="remove">
+          <%= link_to image('remove', :alt => 'Remove subscriber'), subscriber_remove_url(:id => subscriber.id) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<p><%= link_to image("subscribers/new-subscriber", :alt => "New subscriber"), {:action => :new} %></p>
