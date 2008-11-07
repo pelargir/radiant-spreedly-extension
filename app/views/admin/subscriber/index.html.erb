@@ -1,5 +1,3 @@
-<% include_stylesheet 'admin/subscribers/subscribers' %>
-
 <h1>Subscribers</h1>
 
 <p>You can enter subscribers here, which will show up on the public side of your website.</p>
@@ -14,13 +12,13 @@
   </thead>
 
   <tbody>
-    <% Subscriber.find(:all).each do |subscriber| %>
+    <% @subscribers.each do |s| %>
       <tr class="node level-1">
         <td class="subscriber">
-          <%= link_to subscriber.email, subscriber_edit_url(:id => subscriber.id) %>
+          <%= link_to s.email, subscriber_edit_url(:id => s.id) %>
         </td>
         <td class="remove">
-          <%= link_to "remove", subscriber_remove_url(:id => subscriber.id) %>
+          <%= link_to "remove", subscriber_remove_url(:id => s.id) %>
         </td>
       </tr>
     <% end %>
