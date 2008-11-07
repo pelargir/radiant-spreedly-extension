@@ -14,15 +14,13 @@
   </thead>
 
   <tbody>
-    <%# @subscribers.each do |subscriber| %>
     <% Subscriber.find(:all).each do |subscriber| %>
       <tr class="node level-1">
         <td class="subscriber">
-          <%# image('subscribers/subscriber') %>
-          <%= link_to subscriber.title, subscriber_edit_url(:id => subscriber.id) %>
+          <%= link_to subscriber.email, subscriber_edit_url(:id => subscriber.id) %>
         </td>
         <td class="remove">
-          <%= link_to image('remove', :alt => 'Remove subscriber'), subscriber_remove_url(:id => subscriber.id) %>
+          <%= link_to "remove", subscriber_remove_url(:id => subscriber.id) %>
         </td>
       </tr>
     <% end %>
@@ -30,4 +28,4 @@
 
 </table>
 
-<p><%= link_to image("subscribers/new-subscriber", :alt => "New subscriber"), {:action => :new} %></p>
+<p><%= link_to "new", subscriber_new_url %></p>

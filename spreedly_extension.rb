@@ -8,10 +8,10 @@ class SpreedlyExtension < Radiant::Extension
   
   define_routes do |map|
     map.with_options(:controller => 'admin/subscribers') do |subscriber|
-      subscriber.link_index           'admin/subscribers',             :action => 'index'
-      subscriber.link_new             'admin/subscribers/new',         :action => 'new'
-      subscriber.link_edit            'admin/subscribers/edit/:id',    :action => 'edit'
-      subscriber.link_remove          'admin/subscribers/remove/:id',  :action => 'remove'
+      subscriber.subscriber_index       'admin/subscribers',             :action => 'index'
+      subscriber.subscriber_new         'admin/subscribers/new',         :action => 'new'
+      subscriber.subscriber_edit        'admin/subscribers/edit/:id',    :action => 'edit'
+      subscriber.subscriber_remove      'admin/subscribers/remove/:id',  :action => 'remove'
     end
   end
   
