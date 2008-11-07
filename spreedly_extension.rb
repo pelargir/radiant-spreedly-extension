@@ -17,10 +17,6 @@ class SpreedlyExtension < Radiant::Extension
   
   def activate
     admin.tabs.add "Subscribers", "/admin/subscriber", :before => "Layouts"
+    Page.send :include, SpreedlyTags
   end
-  
-  def deactivate
-    # admin.tabs.remove "Spreedly"
-  end
-  
 end
