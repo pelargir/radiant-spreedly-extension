@@ -6,7 +6,15 @@ class SubscribersOnlyPage < Page
   }
   
   def process(request, response)
-    super
-    response.body << "<span style=\"font-weight:bold; color:red\">This is a protected page!</span>"
+    if request.cookies["subscriber"].empty?
+      response.headers["Status"] = "302"
+      response.headers["Location"] = "/subscriber/login"
+    else
+      super
+    end
+  end
+  
+  def cache?
+    false
   end
 end

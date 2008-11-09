@@ -18,4 +18,12 @@ module SpreedlyTags
     s = tag.locals.subscription
     %{<b>#{s.email}</b>}
   end
+  
+  tag "subscriber" do |tag|
+    tag.expand
+  end
+  
+  tag "subscriber:logout" do |tag|
+    "<a href=\"/subscriber/logout\">Logout</a>"
+  end
 end

@@ -7,11 +7,15 @@ class SpreedlyExtension < Radiant::Extension
   url "http://dev.radiantcms.org/radiant/browser/trunk/extensions/spreedly"
   
   define_routes do |map|
-    map.with_options(:controller => 'admin/subscriber') do |subscriber|
-      subscriber.subscriber_index       'admin/subscriber',             :action => 'index'
-      subscriber.subscriber_new         'admin/subscriber/new',         :action => 'new'
-      subscriber.subscriber_edit        'admin/subscriber/edit/:id',    :action => 'edit'
-      subscriber.subscriber_remove      'admin/subscriber/remove/:id',  :action => 'remove'
+    map.with_options(:controller => "subscriber") do |s|
+      s.subscriber_login       "subscriber/login",             :action => "login"
+      s.subscriber_logout      "subscriber/logout",            :action => "logout"
+    end
+    map.with_options(:controller => "admin/subscriber") do |s|
+      s.subscriber_index       "admin/subscriber",             :action => "index"
+      s.subscriber_new         "admin/subscriber/new",         :action => "new"
+      s.subscriber_edit        "admin/subscriber/edit/:id",    :action => "edit"
+      s.subscriber_remove      "admin/subscriber/remove/:id",  :action => "remove"
     end
   end
   
