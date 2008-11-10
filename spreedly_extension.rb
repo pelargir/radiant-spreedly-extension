@@ -11,6 +11,8 @@ class SpreedlyExtension < Radiant::Extension
       s.subscriber_login       "subscriber/login",             :action => "login"
       s.subscriber_logout      "subscriber/logout",            :action => "logout"
       s.subscriber_register    "subscriber/register",          :action => "register"
+      s.subscriber_changed     "subscriber/changed",           :action => "changed"
+      s.subscriber_done        "subscriber/done",              :action => "done"
     end
     map.with_options(:controller => "admin/subscriber") do |s|
       s.subscriber_index       "admin/subscriber",             :action => "index"

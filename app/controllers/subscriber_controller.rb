@@ -1,6 +1,7 @@
 class SubscriberController < ApplicationController
   no_login_required
   helper_method :logged_in?, :current_subscriber
+  skip_before_filter :verify_authenticity_token, :only => :changed
   
   def login
     if request.post?
@@ -33,6 +34,17 @@ class SubscriberController < ApplicationController
     else
       render :layout => false
     end
+  end
+  
+  def changed
+    ids = (params[:subscriber_ids] || "").split(",")
+    subscribers = Subscriber.find(:all, :conditions => ["id in (?)", ids])
+    subscribers.each { |s| s.refresh_from_spreedly }
+    head :ok
+  end
+  
+  def done
+    render :layout => false
   end
   
   private
