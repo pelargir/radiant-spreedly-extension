@@ -1,6 +1,7 @@
 <%= error_messages_for :subscriber %>
 <% form_for :subscriber do |f| -%>
-  Email: <%= f.text_field :email %>
+  Email: <%= f.text_field :email, :size => 20 %><br/>
+  Password: <%= f.password_field :password, :size => 20 %><br/>
   <%= f.submit "Register" %>
 <% end -%>
 <%= link_to "Go back", subscriber_login_url %>

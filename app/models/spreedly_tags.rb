@@ -1,5 +1,7 @@
 module SpreedlyTags
   include Radiant::Taggable
+  include ActionController::UrlWriter  
+  default_url_options[:host] = "localhost:3000"
 
   tag "subscribers" do |tag|
     tag.expand
@@ -24,7 +26,7 @@ module SpreedlyTags
   end
   
   tag "subscriber:logout" do |tag|
-    "<a href=\"/subscriber/logout\">Logout</a>"
+    "<a href=\"#{subscriber_logout_url}\">Logout</a>"
   end
   
   tag "subscriber:identity" do |tag|
