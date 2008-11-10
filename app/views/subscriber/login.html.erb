@@ -1,5 +1,5 @@
-<% unless flash[:error].blank? -%>
-  <span style="color:red"><%= flash[:error] %></span>
+<% unless flash[:notice].blank? -%>
+  <span style="color:red"><%= flash[:notice] %></span>
 <% end -%>
 
 <% if logged_in? -%>
@@ -8,7 +8,7 @@
   <%= link_to "Logout", subscriber_logout_url %>
   
 <% else -%>
-  <% form_tag do |f| -%>
+  <% form_tag do -%>
     Email: <%= text_field_tag :email %>
     <%= submit_tag "Login" %>
   <% end -%>

@@ -1,1 +1,6 @@
-TBD
+<%= error_messages_for :subscriber %>
+<% form_for :subscriber do |f| -%>
+  Email: <%= f.text_field :email %>
+  <%= f.submit "Register" %>
+<% end -%>
+<%= link_to "Go back", subscriber_login_url %>

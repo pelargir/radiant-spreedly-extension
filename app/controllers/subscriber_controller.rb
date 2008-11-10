@@ -7,7 +7,7 @@ class SubscriberController < ApplicationController
       if subscriber = Subscriber.find_by_email(params[:email])
         cookies["subscriber"] = { :value => subscriber.id.to_s, :expires => 1.hour.from_now }
       else
-        flash[:error] = "Could not find subscriber with email address #{ERB::Util.h params[:email]}"
+        flash[:notice] = "Could not find subscriber with email address #{ERB::Util.h params[:email]}"
       end
       redirect_to subscriber_login_url
     else
@@ -17,12 +17,22 @@ class SubscriberController < ApplicationController
   
   def logout
     cookies["subscriber"] = nil
-    flash[:error] = "You have been logged out"
+    flash[:notice] = "You have been logged out"
     redirect_to subscriber_login_url
   end
   
   def register
-    render :layout => false
+    if request.post?
+      @subscriber = Subscriber.new(params[:subscriber])
+      if @subscriber.save
+        flash[:notice] = "You've been registered. Please login."
+        redirect_to subscriber_login_url
+      else
+        render :layout => false
+      end
+    else
+      render :layout => false
+    end
   end
   
   private
