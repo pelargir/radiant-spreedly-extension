@@ -1,3 +1,16 @@
-= Spreedly
+= Spreedly Extension for Radiant
 
 Description goes here
+
+== Radius tags
+
+<r:subscriber:logout />
+
+Renders a logout link
+
+
+<r:subscriber:identity />
+
+Renders the identity of the logged in subscriber, like this:
+
+   You are logged in as foo@bar.com

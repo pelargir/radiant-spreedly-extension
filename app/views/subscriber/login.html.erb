@@ -9,8 +9,13 @@
   <% else -%>
     You are NOT paid up.
     <%= link_to "Subscribe", current_subscriber.spreedly_url %>
-    (or <%= link_to "refresh from Spreedly", subscriber_changed_url(:subscriber_ids => current_subscriber.id) %>)
   <% end -%>
+  
+  <% if RAILS_ENV == "development" -%>
+    <br/>
+    <%= link_to "Refresh from Spreedly", subscriber_changed_url(:subscriber_ids => current_subscriber.id) %>
+  <% end -%>
+  
   <br/>
   <%= link_to "Logout", subscriber_logout_url %>
   

@@ -26,4 +26,10 @@ module SpreedlyTags
   tag "subscriber:logout" do |tag|
     "<a href=\"/subscriber/logout\">Logout</a>"
   end
+  
+  tag "subscriber:identity" do |tag|
+    id = tag.locals.page.request.cookies["subscriber"]
+    s = Subscriber.find(id)
+    "Logged in as <b>#{s.email}</b>"
+  end
 end
