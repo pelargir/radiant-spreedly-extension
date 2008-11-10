@@ -3,9 +3,14 @@
 <% end -%>
 
 <% if logged_in? -%>
-  You are logged in.
-  <%= button_to "Logout", subscriber_logout_url %>
+  You are logged in as <%= current_subscriber.email %><br/>
+  <%= link_to "Subscribe", current_subscriber.spreedly_url %><br/>
+  <%= link_to "Logout", subscriber_logout_url %>
+  
 <% else -%>
-  Please login!
-  <%= button_to "Login", subscriber_login_url, :method => :post %>
+  <% form_tag do |f| -%>
+    Email: <%= text_field_tag :email %>
+    <%= submit_tag "Login" %>
+  <% end -%>
+  <%= link_to "Register", subscriber_register_url %>
 <% end -%>
