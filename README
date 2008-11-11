@@ -55,11 +55,14 @@ for a subscription through Spreedly.
 
 == Radius Tags
 
-<r:subscriber:logout />
-Renders a logout link
+Note: These tags are intended to be used only on pages that are "Subscribers Only."
+They won't work as expected when used on other pages.
 
-<r:subscriber:identity />
-Renders the identity string of the logged in subscriber.
+<r:subscriber:username />
+Renders the username of the current subscriber.
+
+<r:subscriber:logout />
+Renders a logout link for the current subscriber.
 
 == Resources
 

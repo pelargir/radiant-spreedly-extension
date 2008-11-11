@@ -20,8 +20,10 @@ class SubscriberController < ApplicationController
   end
   
   def logout
-    cookies["subscriber"] = nil
-    flash[:notice] = "You have been logged out."
+    if logged_in?
+      cookies["subscriber"] = nil
+      flash[:notice] = "You have been logged out."
+    end
     redirect_to subscriber_login_url
   end
   
