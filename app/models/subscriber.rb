@@ -9,9 +9,10 @@ class Subscriber < ActiveRecord::Base
   before_save :encrypt_password
   
   def spreedly_url
-    sc = SpreedlyConfig.first
-    test = sc.mode == "Testing" ? "-test" : ""
-    "https://spreedly.com/#{sc.login_name}#{test}/subscribers/#{id}/subscribe/#{sc.plan_id}/#{email}-#{id}"
+    if  sc = SpreedlyConfig.first
+      test = sc.mode == "Testing" ? "-test" : ""
+      "https://spreedly.com/#{sc.login_name}#{test}/subscribers/#{id}/subscribe/#{sc.plan_id}/#{email}-#{id}"
+    end
   end
   
   def refresh_from_spreedly

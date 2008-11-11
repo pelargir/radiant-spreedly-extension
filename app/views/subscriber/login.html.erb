@@ -1,6 +1,4 @@
-<% unless flash[:notice].blank? -%>
-  <span style="color:red"><%= flash[:notice] %></span>
-<% end -%>
+<%= render :partial => "notice" %>
 
 <% form_tag do -%>
   Email: <%= text_field_tag :email, nil, :size => 20 %><br/>

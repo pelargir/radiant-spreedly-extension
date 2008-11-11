@@ -36,10 +36,15 @@ class SubscriberController < ApplicationController
   end
   
   def changed
-    ids = (params[:subscriber_ids] || "").split(",")
-    subscribers = Subscriber.find(:all, :conditions => ["id in (?)", ids])
-    subscribers.each { |s| s.refresh_from_spreedly }
-    head :ok
+    if params[:return]
+      flash[:notice] = "Your account has been refreshed."
+      redirect_to subscriber_show_url
+    else
+      ids = (params[:subscriber_ids] || "").split(",")
+      subscribers = Subscriber.find(:all, :conditions => ["id in (?)", ids])
+      subscribers.each { |s| s.refresh_from_spreedly }
+      head :ok
+    end
   end
   
   def show
