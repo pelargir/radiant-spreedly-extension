@@ -1,0 +1,15 @@
+<h2>Your Subscription</h2>
+
+<p>
+  <b>Username:</b> <%= current_subscriber.email %><br/>
+  <b>Subscription:</b>
+  <% if current_subscriber.active? -%>
+    You are all paid up!
+  <% else -%>
+    No active subscription.
+    (<%= link_to "Subscribe", current_subscriber.spreedly_url %>)
+  <% end -%>
+</p>
+
+<p><%= link_to "Refresh Account", subscriber_changed_url(:subscriber_ids => current_subscriber.id) %></p>
+<p><%= link_to "Logout", subscriber_logout_url %></p>

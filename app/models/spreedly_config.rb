@@ -3,6 +3,6 @@ class SpreedlyConfig < ActiveRecord::Base
   validates_numericality_of :plan_id
   
   def self.first
-    find(:first)
+    @first ||= find(:first)
   end
 end

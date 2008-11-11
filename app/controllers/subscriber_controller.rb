@@ -2,17 +2,20 @@ class SubscriberController < ApplicationController
   no_login_required
   helper_method :logged_in?, :current_subscriber
   skip_before_filter :verify_authenticity_token, :only => :changed
+  layout false
   
   def login
+    if logged_in?
+      redirect_to subscriber_show_url
+    end
     if request.post?
       if subscriber = Subscriber.authenticate(params[:email], params[:password])
         cookies["subscriber"] = { :value => subscriber.id.to_s, :expires => 1.hour.from_now }
+        redirect_to subscriber_show_url
       else
         flash[:notice] = "Unable to login."
+        redirect_to subscriber_login_url
       end
-      redirect_to subscriber_login_url
-    else
-      render :layout => false
     end
   end
   
@@ -28,11 +31,7 @@ class SubscriberController < ApplicationController
       if @subscriber.save
         flash[:notice] = "You've been registered. Please login."
         redirect_to subscriber_login_url
-      else
-        render :layout => false
       end
-    else
-      render :layout => false
     end
   end
   
@@ -43,8 +42,10 @@ class SubscriberController < ApplicationController
     head :ok
   end
   
-  def done
-    render :layout => false
+  def show
+    if !logged_in?
+      redirect_to subscriber_login_url
+    end
   end
   
   private
