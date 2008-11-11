@@ -13,11 +13,34 @@ extension should be listed there.
 
 == Configuring Spreedly
 
-TODO
+If you haven't registered with Spreedly, go ahead and sign up for an account. Once
+you've logged in, choose either the testing or production environment based on whether
+you want to test your subscription service or actually start charging people.
+
+Under Configuration, choose or create the subscription plan you want to use. Change
+its return URL to:
+
+  http://domain.com/subscriber/show
+
+Where domain.com is your web site URL. Also under Configuration, go into Site URLs
+and set the Subscribers Changed Notification URL to:
+
+  http://domain.com/subscriber/changed
+
+== Configuring the Spreedly Extension
+
+Spreedly must also be configured on your local site. Login as an admin and click the
+"Spreedly" tab, then click edit. Enter the your Spreedly account name and the ID of
+the subscription plan you want to use. Mode can be set to "Testing" when you're
+testing your site with Spreedly, but you should change it to "Production" when you
+actually want to start charging users for subscriptions.
 
 == Managing Subscribers
 
-TODO
+Login as an admin and click on the Subscribers tab to view a list of subscribers
+who have registered on your site. You can edit existing subscribers to change their
+password or email address from this page. New subscribers can also be created
+if you'd prefer to bypass registration through the site.
 
 == Subscription Plans
 
