@@ -20,10 +20,15 @@ class SpreedlyExtension < Radiant::Extension
       s.subscriber_edit        "admin/subscriber/edit/:id",    :action => "edit"
       s.subscriber_remove      "admin/subscriber/remove/:id",  :action => "remove"
     end
+    map.with_options(:controller => "admin/spreedly") do |s|
+      s.spreedly_index         "admin/spreedly",               :action => "index"
+      s.spreedly_edit          "admin/spreedly/edit",          :action => "edit"
+    end
   end
   
   def activate
     admin.tabs.add "Subscribers", "/admin/subscriber", :before => "Layouts"
+    admin.tabs.add "Spreedly", "/admin/spreedly", :before => "Layouts"
     Page.send :include, SpreedlyTags
   end
 end

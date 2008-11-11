@@ -1,0 +1,10 @@
+<h2>Edit Spreedly Configuration</h2>
+
+<%= error_messages_for :spreedly_config %>
+
+<% form_for :spreedly_config do |f| -%>
+  Login Name: <%= f.text_field :login_name %><br/>
+  Plan ID: <%= f.text_field :plan_id %><br/>
+  Mode: <%= f.select :mode, %w(Testing Production) %><br/>
+  <%= f.submit "Save" %> or <%= link_to "cancel", spreedly_index_url %>
+<% end -%>

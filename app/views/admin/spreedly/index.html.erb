@@ -1,0 +1,15 @@
+<h1>Spreedly</h1>
+
+<p>Adjust your Spreedly configuration here.</p>
+
+<p>
+<% if @spreedly_config -%>
+  <b>Account Name:</b> <%= @spreedly_config.login_name %><br/>
+  <b>Plan ID:</b> <%= @spreedly_config.plan_id %><br/>
+  <b>Mode:</b> <%= @spreedly_config.mode %><br/>
+<% else -%>
+  <span style="font-weight:bold; color:red">Please set up your Spreedly account by clicking "edit" below.</b>
+<% end -%>
+</p>
+
+<p><%= link_to "edit", spreedly_edit_url %></p>
