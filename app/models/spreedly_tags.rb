@@ -3,6 +3,15 @@ module SpreedlyTags
   include ActionController::UrlWriter
   default_url_options[:host] = "localhost:3000"
   
+  tag "flash" do |tag|
+    tag.expand
+  end
+  
+  tag "flash:notices" do |tag|
+    notice = tag.locals.page.request.parameters["notice"]
+    "<span style=\"font-weight:bold; color:red\">#{notice}</span>" unless notice.blank?
+  end
+  
   ## subscribers
   
   tag "subscribers" do |tag|
@@ -41,7 +50,7 @@ module SpreedlyTags
   
   tag "subscriber:refresh" do |tag|
     s = tag.locals.subscriber
-    "<a href=\"/subscriber_actions/changed?subscriber_ids=#{s.id}&return=true\">#{tag.attr['title'] || 'Refresh Subscription'}</a>"
+    "<a href=\"/subscriber_actions/changed?subscriber_ids=#{s.id}&return=true\">#{tag.attr['title'] || 'Refresh Subscription Status'}</a>"
   end
   
   tag "subscriber:subscription" do |tag|

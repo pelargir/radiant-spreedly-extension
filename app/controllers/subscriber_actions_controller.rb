@@ -7,17 +7,17 @@ class SubscriberActionsController < ApplicationController
       login_as subscriber
       redirect_to "/subscriber"
     else
-      flash[:notice] = "Unable to login."
-      redirect_to "/subscriber/login"
+      notice = "Unable to login."
+      redirect_to "/subscriber/login?notice=#{notice}"
     end
   end
   
   def logout
     if logged_in?
       cookies["subscriber"] = nil
-      flash[:notice] = "You have been logged out."
+      notice = "You have been logged out."
     end
-    redirect_to "/subscriber/login"
+    redirect_to "/subscriber/login?notice=#{notice}"
   end
   
   def register
@@ -26,15 +26,15 @@ class SubscriberActionsController < ApplicationController
       login_as @subscriber
       redirect_to "/subscriber"
     else
-      flash[:notice] = "One or more validation errors occured."
-      redirect_to "/subscriber/register"
+      notice = "One or more validation errors occured."
+      redirect_to "/subscriber/register?notice=#{notice}"
     end
   end
   
   def changed
     if params[:return]
-      flash[:notice] = "Your account has been refreshed."
-      redirect_to "/subscriber"
+      notice = "Your subscription status has been refreshed."
+      redirect_to "/subscriber?notice=#{notice}"
     else
       ids = (params[:subscriber_ids] || "").split(",")
       subscribers = Subscriber.find(:all, :conditions => ["id in (?)", ids])

@@ -1,3 +1,3 @@
-<% unless flash[:notice].blank? -%>
-  <span style="color:red"><%= flash[:notice] %></span>
+<% unless params[:notice].blank? -%>
+  <span style="color:red"><%=h params[:notice] %></span>
 <% end -%>
