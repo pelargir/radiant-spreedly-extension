@@ -4,7 +4,7 @@ class SubscriberActionsController < ApplicationController
   
   def login
     if subscriber = Subscriber.authenticate(params[:email], params[:password])
-      cookies["subscriber"] = { :value => subscriber.id.to_s, :expires => 1.hour.from_now }
+      login_as subscriber
       redirect_to "/subscriber"
     else
       flash[:notice] = "Unable to login."
@@ -23,8 +23,8 @@ class SubscriberActionsController < ApplicationController
   def register
     @subscriber = Subscriber.new(params[:subscriber])
     if @subscriber.save
-      flash[:notice] = "You've been registered. Please login."
-      redirect_to "/subscriber/login"
+      login_as @subscriber
+      redirect_to "/subscriber"
     else
       flash[:notice] = "One or more validation errors occured."
       redirect_to "/subscriber/register"
@@ -47,5 +47,9 @@ class SubscriberActionsController < ApplicationController
   
   def logged_in?
     cookies["subscriber"].blank? ? nil : Subscriber.find_by_id(cookies["subscriber"])
+  end
+  
+  def login_as(subscriber)
+    cookies["subscriber"] = { :value => subscriber.id.to_s, :expires => 1.hour.from_now }
   end
 end
