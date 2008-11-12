@@ -50,7 +50,8 @@ module SpreedlyTags
   
   tag "subscriber:refresh" do |tag|
     s = tag.locals.subscriber
-    "<a href=\"/subscriber_actions/changed?subscriber_ids=#{s.id}&return=true\">#{tag.attr['title'] || 'Refresh Subscription Status'}</a>"
+    "<a href=\"/subscriber_actions/changed?subscriber_ids=#{s.id}&" <<
+      "return=true\">#{tag.attr['title'] || 'Refresh Subscription Status'}</a>"
   end
   
   tag "subscriber:subscription" do |tag|

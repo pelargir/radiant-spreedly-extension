@@ -1,2 +1,3 @@
-- Extract Radius tags from static subscriber pages
-- Redirect to original requested URL after login
+- Fix flash messages to work without caching
+- Refactor subscription tags
+- Redirect to originally requested URL after login
