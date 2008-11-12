@@ -11,4 +11,41 @@ class SubscriberActionsController < ApplicationController
       redirect_to "/subscriber/login"
     end
   end
+  
+  def logout
+    if logged_in?
+      cookies["subscriber"] = nil
+      flash[:notice] = "You have been logged out."
+    end
+    redirect_to "/subscriber/login"
+  end
+  
+  def register
+    @subscriber = Subscriber.new(params[:subscriber])
+    if @subscriber.save
+      flash[:notice] = "You've been registered. Please login."
+      redirect_to "/subscriber/login"
+    else
+      flash[:notice] = "One or more validation errors occured."
+      redirect_to "/subscriber/register"
+    end
+  end
+  
+  def changed
+    if params[:return]
+      flash[:notice] = "Your account has been refreshed."
+      redirect_to "/subscriber"
+    else
+      ids = (params[:subscriber_ids] || "").split(",")
+      subscribers = Subscriber.find(:all, :conditions => ["id in (?)", ids])
+      subscribers.each { |s| s.refresh_from_spreedly }
+      head :ok
+    end
+  end
+  
+  private
+  
+  def logged_in?
+    cookies["subscriber"].blank? ? nil : Subscriber.find_by_id(cookies["subscriber"])
+  end
 end

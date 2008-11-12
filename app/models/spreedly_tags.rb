@@ -1,6 +1,6 @@
 module SpreedlyTags
   include Radiant::Taggable
-  include ActionController::UrlWriter  
+  include ActionController::UrlWriter
   default_url_options[:host] = "localhost:3000"
   
   ## subscribers
@@ -26,16 +26,35 @@ module SpreedlyTags
   ## subscriber
   
   tag "subscriber" do |tag|
+    id = tag.locals.page.request.cookies["subscriber"]
+    tag.locals.subscriber = Subscriber.find(id) unless id.empty?
     tag.expand
   end
   
   tag "subscriber:logout" do |tag|
-    "<a href=\"#{subscriber_logout_url}\">Logout</a>"
+    "<a href=\"#{subscriber_actions_logout_url}\">Logout</a>"
   end
   
   tag "subscriber:username" do |tag|
-    id = tag.locals.page.request.cookies["subscriber"]
-    Subscriber.find(id).email unless id.empty?
+    tag.locals.subscriber.email
+  end
+  
+  tag "subscriber:refresh" do |tag|
+    s = tag.locals.subscriber
+    "<a href=\"/subscriber_actions/changed?subscriber_ids=#{s.id}&return=true\">#{tag.attr['title'] || 'Refresh Subscription'}</a>"
+  end
+  
+  tag "subscriber:subscription" do |tag|
+    s = tag.locals.subscriber
+    if s.active?
+      "You are all paid up!"
+    elsif SpreedlyConfig.first
+      "No active subscription. <a href=\"#{s.spreedly_url}\">Subscribe</a>"
+    else
+      "<span style=\"font-weight:bold; color:red\">" <<
+      "Spreedly is not configured properly. Please contact an admin." <<
+      "</span>"
+    end
   end
   
   ## login
@@ -59,6 +78,14 @@ module SpreedlyTags
   end
   
   tag "subscriber:register:link" do |tag|
-    "<a href=\"#{subscriber_register_url}\">#{tag.attr['title'] || 'Register'}</a>"
+    "<a href=\"/subscriber/register\">#{tag.attr['title'] || 'Register'}</a>"
+  end
+  
+  tag "subscriber:register:form" do |tag|
+    "<form action=\"/subscriber_actions/register\" method=\"post\">" <<
+      "Email: <input type=\"text\" name=\"subscriber[email]\" size=\"20\" /><br/>" <<
+      "Password: <input type=\"password\" name=\"subscriber[password]\" size=\"20\" /><br/>" <<
+      "<input type=\"submit\" name=\"submit\" value=\"Register\" />" <<
+    "</form>"
   end
 end
