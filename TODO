@@ -1,3 +1,2 @@
-- Fix flash messages to work without caching
 - Refactor subscription tags
 - Redirect to originally requested URL after login

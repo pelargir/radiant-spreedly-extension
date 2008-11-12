@@ -20,12 +20,12 @@ you want to test your subscription service or actually start charging people.
 Under Configuration, choose or create the subscription plan you want to use. Change
 its return URL to:
 
-  http://domain.com/subscriber/show
+  http://domain.com/subscriber
 
 Where domain.com is your web site URL. Also under Configuration, go into Site URLs
 and set the Subscribers Changed Notification URL to:
 
-  http://domain.com/subscriber/changed
+  http://domain.com/subscriber_actions/changed
 
 == Configuring the Spreedly Extension
 
@@ -63,6 +63,8 @@ Renders the username of the current subscriber.
 
 <r:subscriber:logout />
 Renders a logout link for the current subscriber.
+
+TODO
 
 == Resources
 

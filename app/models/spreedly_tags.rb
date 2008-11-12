@@ -8,8 +8,8 @@ module SpreedlyTags
   end
   
   tag "flash:notices" do |tag|
-    notice = tag.locals.page.request.parameters["notice"]
-    "<span style=\"font-weight:bold; color:red\">#{notice}</span>" unless notice.blank?
+    "<div id=\"notice\" style=\"font-weight:bold; color:red\"></div>" <<
+    "<script src=\"/javascripts/spreedly.js\" type=\"text/javascript\"></script>"
   end
   
   ## subscribers

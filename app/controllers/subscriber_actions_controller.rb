@@ -7,17 +7,13 @@ class SubscriberActionsController < ApplicationController
       login_as subscriber
       redirect_to "/subscriber"
     else
-      notice = "Unable to login."
-      redirect_to "/subscriber/login?notice=#{notice}"
+      redirect_with_notice "/subscriber/login", "Unable to login."
     end
   end
   
   def logout
-    if logged_in?
-      cookies["subscriber"] = nil
-      notice = "You have been logged out."
-    end
-    redirect_to "/subscriber/login?notice=#{notice}"
+    cookies["subscriber"] = nil
+    redirect_with_notice "/subscriber/login", "You have been logged out."
   end
   
   def register
@@ -26,15 +22,13 @@ class SubscriberActionsController < ApplicationController
       login_as @subscriber
       redirect_to "/subscriber"
     else
-      notice = "One or more validation errors occured."
-      redirect_to "/subscriber/register?notice=#{notice}"
+      redirect_with_notice "/subscriber/register", "One or more values are missing."
     end
   end
   
   def changed
     if params[:return]
-      notice = "Your subscription status has been refreshed."
-      redirect_to "/subscriber?notice=#{notice}"
+      redirect_with_notice "/subscriber", "Your subscription status has been refreshed."
     else
       ids = (params[:subscriber_ids] || "").split(",")
       subscribers = Subscriber.find(:all, :conditions => ["id in (?)", ids])
@@ -51,5 +45,9 @@ class SubscriberActionsController < ApplicationController
   
   def login_as(subscriber)
     cookies["subscriber"] = { :value => subscriber.id.to_s, :expires => 1.hour.from_now }
+  end
+  
+  def redirect_with_notice(url, notice)
+    redirect_to "#{url}?notice=#{notice}"
   end
 end
