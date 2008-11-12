@@ -7,8 +7,10 @@ class SpreedlyExtension < Radiant::Extension
   url "http://dev.radiantcms.org/radiant/browser/trunk/extensions/spreedly"
   
   define_routes do |map|
+    map.with_options(:controller => "subscriber_actions") do |s|
+      s.subscriber_actions_login   "subscriber_actions/login",    :action => "login"
+    end
     map.with_options(:controller => "subscriber") do |s|
-      s.subscriber_login       "subscriber/login",             :action => "login"
       s.subscriber_logout      "subscriber/logout",            :action => "logout"
       s.subscriber_register    "subscriber/register",          :action => "register"
       s.subscriber_changed     "subscriber/changed",           :action => "changed"

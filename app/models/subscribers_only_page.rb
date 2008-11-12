@@ -10,7 +10,13 @@ class SubscribersOnlyPage < Page
       response.headers["Status"] = "302"
       response.headers["Location"] = "/subscriber/login"
     else
-      super
+      s = Subscriber.find(request.cookies["subscriber"])
+      if s && s.active?
+        super
+      else
+        response.headers["Status"] = "302"
+        response.headers["Location"] = "/subscriber/show"
+      end
     end
   end
   

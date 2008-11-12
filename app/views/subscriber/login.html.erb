@@ -1,8 +1,0 @@
-<%= render :partial => "notice" %>
-
-<% form_tag do -%>
-  Email: <%= text_field_tag :email, nil, :size => 20 %><br/>
-  Password: <%= password_field_tag :password, nil, :size => 20 %><br/>
-  <%= submit_tag "Login" %>
-<% end -%>
-<%= link_to "Register", subscriber_register_url %>
