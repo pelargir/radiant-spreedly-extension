@@ -31,3 +31,5 @@ class SpreedlyExtension < Radiant::Extension
     Page.send :include, SpreedlyTags
   end
 end
+
+# Soli Deo Gloria!

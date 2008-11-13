@@ -55,16 +55,32 @@ for a subscription through Spreedly.
 
 == Radius Tags
 
-Note: These tags are intended to be used only on pages that are "Subscribers Only."
-They won't work as expected when used on other pages.
-
 <r:subscriber:username />
 Renders the username of the current subscriber.
 
 <r:subscriber:logout />
 Renders a logout link for the current subscriber.
 
-TODO
+<r:subscriber:subscription />
+Renders the status of the current subscriber's Spreedly subscription.
+
+<r:subscriber:refresh />
+Renders a link to refresh the subscriber's account status from Spreedly. Override
+the link text using the title attribute (e.g. <r:subscriber:refresh title="Refresh" />)
+
+<r:subscriber:login:form />
+Renders a login form for subscribers.
+
+<r:subscriber:register:link />
+Renders a link to register a new subscriber. Override the link text using the title
+attribute (e.g. <r:subscriber:register:link title="Register" />)
+
+<r:subscriber:register:form />
+Renders a registration form for new subscribers.
+
+<r:flash:notices />
+Displays any pertinent user notices. For example, notification that the login failed
+or that the requested page can only be accessed by paid subscribers.
 
 == Resources
 
