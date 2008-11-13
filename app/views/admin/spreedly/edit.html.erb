@@ -4,6 +4,6 @@
   API Token: <%= text_field_tag :api_token, Radiant::Config['spreedly.api_token'],:size => 50 %><br/>
   Login Name: <%= text_field_tag :login_name, Radiant::Config['spreedly.login_name'], :size => 20 %><br/>
   Plan: <%= select_tag :plan_id, options_for_select(SubscriptionPlan.to_dropdown, Radiant::Config['spreedly.plan_id'].to_i) %><br/>
-  Mode: <%= select_tag :mode, options_for_select(%w(Testing Production), Radiant::Config['spreedly.mode']) %><br/>
+  Mode: <%= select_tag :mode, options_for_select(%w(Test Production), Radiant::Config['spreedly.mode']) %><br/>
   <%= submit_tag "Save" %> or <%= link_to "cancel", spreedly_index_url %>
 <% end -%>
