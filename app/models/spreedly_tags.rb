@@ -3,13 +3,17 @@ module SpreedlyTags
   include ActionController::UrlWriter
   default_url_options[:host] = "localhost:3000"
   
+  include ActionView::Helpers::TagHelper
+  include ActionView::Helpers::AssetTagHelper
+  include ActionView::Helpers::UrlHelper
+  
   tag "flash" do |tag|
     tag.expand
   end
   
   tag "flash:notices" do |tag|
-    "<div id=\"notice\" style=\"font-weight:bold; color:red\"></div>" <<
-    "<script src=\"/javascripts/spreedly.js\" type=\"text/javascript\"></script>"
+    content_tag(:div, nil, :id => "notice", :style => "font-weight:bold; color:red") <<
+    javascript_include_tag("spreedly")
   end
   
   ## subscribers
@@ -41,7 +45,7 @@ module SpreedlyTags
   end
   
   tag "subscriber:logout" do |tag|
-    "<a href=\"#{subscriber_actions_logout_url}\">Logout</a>"
+    link_to "Logout", subscriber_actions_logout_url
   end
   
   tag "subscriber:username" do |tag|
@@ -50,8 +54,8 @@ module SpreedlyTags
   
   tag "subscriber:refresh" do |tag|
     s = tag.locals.subscriber
-    "<a href=\"/subscriber_actions/changed?subscriber_ids=#{s.id}&" <<
-      "return=true\">#{tag.attr['title'] || 'Refresh Subscription Status'}</a>"
+    link_to tag.attr["title"] || "Refresh Subscription Status",
+      "/subscriber_actions/changed?subscriber_ids=#{s.id}&return=true"
   end
   
   tag "subscriber:subscription" do |tag|
@@ -59,11 +63,11 @@ module SpreedlyTags
     if s.active?
       "You are all paid up!"
     elsif SpreedlyConfig.first
-      "No active subscription. <a href=\"#{s.spreedly_url}\">Subscribe</a>"
+      "No active subscription. #{link_to 'Subscribe', s.spreedly_url}"
     else
-      "<span style=\"font-weight:bold; color:red\">" <<
-      "Spreedly is not configured properly. Please contact an admin." <<
-      "</span>"
+      content_tag(:span, :style => "font-weight:bold; color:red") do
+        "Spreedly is not configured properly. Please contact an admin."
+      end
     end
   end
   
@@ -88,7 +92,7 @@ module SpreedlyTags
   end
   
   tag "subscriber:register:link" do |tag|
-    "<a href=\"/subscriber/register\">#{tag.attr['title'] || 'Register'}</a>"
+    link_to tag.attr["title"] || "Register", "/subscriber/register"
   end
   
   tag "subscriber:register:form" do |tag|
