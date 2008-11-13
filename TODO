@@ -1,2 +1,2 @@
-- Create migration to generate sample pages and page parts
+- Document migrations that generate sample pages and page parts
 - Split out subscription tags into separate form fields
