@@ -1,11 +1,9 @@
 <h2>Edit Spreedly Configuration</h2>
 
-<%= error_messages_for :spreedly_config %>
-
-<% form_for :spreedly_config do |f| -%>
-  API Token: <%= f.text_field :api_token, :size => 50 %><br/>
-  Login Name: <%= f.text_field :login_name, :size => 20 %><br/>
-  Plan: <%= f.select :plan_id, SubscriptionPlan.to_dropdown %><br/>
-  Mode: <%= f.select :mode, %w(Testing Production) %><br/>
-  <%= f.submit "Save" %> or <%= link_to "cancel", spreedly_index_url %>
+<% form_tag do -%>
+  API Token: <%= text_field_tag :api_token, Radiant::Config['spreedly.api_token'],:size => 50 %><br/>
+  Login Name: <%= text_field_tag :login_name, Radiant::Config['spreedly.login_name'], :size => 20 %><br/>
+  Plan: <%= select_tag :plan_id, options_for_select(SubscriptionPlan.to_dropdown, Radiant::Config['spreedly.plan_id'].to_i) %><br/>
+  Mode: <%= select_tag :mode, options_for_select(%w(Testing Production), Radiant::Config['spreedly.mode']) %><br/>
+  <%= submit_tag "Save" %> or <%= link_to "cancel", spreedly_index_url %>
 <% end -%>

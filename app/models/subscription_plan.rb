@@ -4,4 +4,8 @@ class SubscriptionPlan < ActiveResource::Base
   def self.to_dropdown
     find(:all).collect { |e| [e.name, e.id] }
   end
+  
+  def self.find_by_id(id)
+    find(:all).detect { |e| e.id == id.to_i }
+  end
 end

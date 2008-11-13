@@ -9,10 +9,20 @@ class Subscriber < ActiveRecord::Base
   before_save :encrypt_password
   
   def spreedly_url
-    if  sc = SpreedlyConfig.first
-      test = sc.mode == "Testing" ? "-test" : ""
-      "https://spreedly.com/#{sc.login_name}#{test}/subscribers/#{id}/subscribe/#{sc.plan_id}/#{email}-#{id}"
+    if spreedly_configured?
+      test = Radiant::Config['spreedly.mode'] == "Testing" ? "-test" : ""
+      login_name = Radiant::Config['spreedly.login_name']
+      plan_id = Radiant::Config['spreedly.plan_id']
+      "https://spreedly.com/#{login_name}#{test}/subscribers/#{id}/subscribe/#{plan_id}/#{email}-#{id}"
     end
+  end
+  
+  def spreedly_configured?
+    # TODO this is yucky
+    !Radiant::Config['spreedly.api_token'].blank? &&
+    !Radiant::Config['spreedly.login_name'].blank? &&
+    !Radiant::Config['spreedly.plan_id'].blank? &&
+    !Radiant::Config['spreedly.mode'].blank?
   end
   
   def refresh_from_spreedly

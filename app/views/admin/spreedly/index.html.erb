@@ -1,15 +1,12 @@
 <h1>Spreedly</h1>
 
-<% if @spreedly_config -%>
-  <p>You can adjust your Spreedly configuration here.</p>
-  <p>
-    <b>Account Name:</b> <%= @spreedly_config.login_name %><br/>
-    <b>Plan ID:</b> <%= @spreedly_config.plan_id %><br/>
-    <b>Mode:</b> <%= @spreedly_config.mode %><br/>
-  </p>
-<% else -%>
-  <p><span style="font-weight:bold; color:red">Please set up your Spreedly
-    account by clicking "edit" below.</b></p>
-<% end -%>
+<p>You can adjust your Spreedly configuration here.</p>
+
+<p>
+  <b>API Token:</b> <%= Radiant::Config['spreedly.api_token'] %><br/>
+  <b>Login Name:</b> <%= Radiant::Config['spreedly.login_name'] %><br/>
+  <b>Plan:</b> <%= Radiant::Config['spreedly.plan_name'] %><br/>
+  <b>Mode:</b> <%= Radiant::Config['spreedly.mode'] %><br/>
+</p>
 
 <p><%= link_to "edit", spreedly_edit_url %></p>

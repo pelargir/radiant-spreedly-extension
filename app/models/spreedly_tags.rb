@@ -42,12 +42,11 @@ module SpreedlyTags
     s = tag.locals.subscriber
     if s.active?
       "You are all paid up!"
-    elsif SpreedlyConfig.first
+    elsif s.spreedly_configured?
       "No active subscription. #{link_to 'Subscribe', s.spreedly_url}"
     else
-      content_tag(:span, :style => "font-weight:bold; color:red") do
-        "Spreedly is not configured properly. Please contact an admin."
-      end
+      content_tag(:span, "Spreedly is not configured properly. " <<
+        "Please contact an admin.", :style => "font-weight:bold; color:red")
     end
   end
   
