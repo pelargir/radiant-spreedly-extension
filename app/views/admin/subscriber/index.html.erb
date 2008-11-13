@@ -7,6 +7,7 @@
   <thead>
     <tr>
       <th class="subscriber">Subscriber</th>
+      <th class="spreedly">Spreedly</th>
       <th class="status">Status</th>
       <th class="remove">Modify</th>
     </tr>
@@ -17,6 +18,9 @@
       <tr class="node level-1">
         <td class="subscriber">
           <%= link_to s.email, subscriber_edit_url(:id => s.id) %>
+        </td>
+        <td class="spreedly">
+          <%= link_to "View", s.spreedly_account_url %>
         </td>
         <td class="<%= s.active? ? "" : "status" %>">
           <%= s.status %>

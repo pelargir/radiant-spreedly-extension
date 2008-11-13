@@ -17,6 +17,11 @@ class Subscriber < ActiveRecord::Base
     end
   end
   
+  def spreedly_account_url
+    mode = Radiant::Config['spreedly.mode'] == "Testing" ? "test" : "production"
+    "https://spreedly.com/#{mode}/subscribers/#{id}"
+  end
+  
   def spreedly_configured?
     # TODO this is yucky
     !Radiant::Config['spreedly.api_token'].blank? &&
