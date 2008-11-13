@@ -6,12 +6,16 @@ class SubscribersOnlyPage < Page
   
   def process(request, response)
     if request.cookies["subscriber"].empty?
-      response.headers["Status"] = "302"
-      notice = "The page you requested is for subscribers only. Please login or register."
-      response.headers["Location"] = "/subscriber/login?notice=#{notice}"
+      not_a_subscriber(request, response)
     else
       super
     end
+  end
+  
+  def not_a_subscriber(request, response)
+    notice = "The page you requested is for subscribers only. Please login or register."
+    response.headers["Status"] = "302"
+    response.headers["Location"] = "/subscriber/login?notice=#{notice}&requested_url=#{request.url}"
   end
   
   def cache?

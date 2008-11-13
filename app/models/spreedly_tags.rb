@@ -78,7 +78,9 @@ module SpreedlyTags
   end
   
   tag "subscriber:login:form" do |tag|
+    requested_url = tag.locals.page.request.parameters["requested_url"]
     "<form action=\"#{subscriber_actions_login_url}\" method=\"post\">" <<
+    "<input type=\"hidden\" name=\"requested_url\" value=\"#{requested_url}\" />" <<
     "Email: <input type=\"text\" name=\"email\" size=\"20\" /><br/>" <<
     "Password: <input type=\"password\" name=\"password\" size=\"20\" /><br/>" <<
     "<input type=\"submit\" name=\"submit\" value=\"Login\" />" <<

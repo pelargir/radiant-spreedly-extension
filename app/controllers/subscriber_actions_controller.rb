@@ -5,15 +5,19 @@ class SubscriberActionsController < ApplicationController
   def login
     if subscriber = Subscriber.authenticate(params[:email], params[:password])
       login_as subscriber
-      redirect_to "/subscriber"
+      if params[:requested_url].blank?
+        redirect_to "/subscriber"
+      else
+        redirect_to params[:requested_url]
+      end
     else
-      redirect_with_notice "/subscriber/login", "Unable to login."
+      redirect_with "/subscriber/login", :notice => "Unable to login.", :requested_url => params[:requested_url]
     end
   end
   
   def logout
     cookies["subscriber"] = nil
-    redirect_with_notice "/subscriber/login", "You have been logged out."
+    redirect_with "/subscriber/login", :notice => "You have been logged out."
   end
   
   def register
@@ -22,13 +26,13 @@ class SubscriberActionsController < ApplicationController
       login_as @subscriber
       redirect_to "/subscriber"
     else
-      redirect_with_notice "/subscriber/register", "One or more values are missing."
+      redirect_with "/subscriber/register", :notice => "One or more values are missing."
     end
   end
   
   def changed
     if params[:return]
-      redirect_with_notice "/subscriber", "Your subscription status has been refreshed."
+      redirect_with "/subscriber", :notice => "Your subscription status has been refreshed."
     else
       ids = (params[:subscriber_ids] || "").split(",")
       subscribers = Subscriber.find(:all, :conditions => ["id in (?)", ids])
@@ -47,7 +51,8 @@ class SubscriberActionsController < ApplicationController
     cookies["subscriber"] = { :value => subscriber.id.to_s, :expires => 1.hour.from_now }
   end
   
-  def redirect_with_notice(url, notice)
-    redirect_to "#{url}?notice=#{notice}"
+  def redirect_with(url, params)
+    url_params = params.collect { |k,v| "#{k}=#{v}" }.join("&")
+    redirect_to url_params.blank? ? url : "#{url}?#{url_params}"
   end
 end

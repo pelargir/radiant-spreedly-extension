@@ -1,2 +1,3 @@
-- Refactor subscription tags
-- Redirect to originally requested URL after login
+- Finish documenting tags in README
+- Create migration to generate sample pages and page parts
+- Split out subscription tags into separate form fields
