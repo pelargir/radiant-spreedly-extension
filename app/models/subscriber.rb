@@ -25,6 +25,10 @@ class Subscriber < ActiveRecord::Base
     !Radiant::Config['spreedly.mode'].blank?
   end
   
+  def status
+    active? ? "Paid" : "Unpaid"
+  end
+  
   def refresh_from_spreedly
     update_attributes!(:active => SubscriberResource.find(id).active)
   end

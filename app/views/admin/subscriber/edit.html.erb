@@ -8,14 +8,17 @@
   <div class="form-area">
     <div  id="subscriber_form_area">
       <p class="email">
-        <label for="subscriber_email">Email</label>
+        <label for="subscriber_email">Email:</label>
         <%= text_field "subscriber", "email" %>
       </p>
       <p class="password">
-        <label for="subscriber_password">Password</label>
+        <label for="subscriber_password">Password:</label>
         <%= password_field "subscriber", "password" %>
       </p>
-       <span class="clear">&nbsp;</span>
+      <p class="status">
+        <label for="subscriber_status">Status:</label>
+        <%= @subscriber.status %>
+      </p>
     </div>
   </div>
 
