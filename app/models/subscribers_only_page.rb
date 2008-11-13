@@ -7,7 +7,8 @@ class SubscribersOnlyPage < Page
   def process(request, response)
     if request.cookies["subscriber"].empty?
       response.headers["Status"] = "302"
-      response.headers["Location"] = "/subscriber/login"
+      notice = "The page you requested is for subscribers only. Please login or register."
+      response.headers["Location"] = "/subscriber/login?notice=#{notice}"
     else
       super
     end

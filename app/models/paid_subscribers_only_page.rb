@@ -8,15 +8,16 @@ class PaidSubscribersOnlyPage < Page
   def process(request, response)
     if request.cookies["subscriber"].empty?
       response.headers["Status"] = "302"
-      response.headers["Location"] = "/subscriber/login"
+      notice = "The page you requested is for subscribers only. Please login or register."
+      response.headers["Location"] = "/subscriber/login?notice=#{notice}"
     else
       s = Subscriber.find(request.cookies["subscriber"])
       if s && s.active?
         super
       else
-        # TODO need msg explaining that only paid subscribers can access this page
         response.headers["Status"] = "302"
-        response.headers["Location"] = "/subscriber/login"
+        notice = "The page you requested is for paid subscribers only. Please subscribe."
+        response.headers["Location"] = "/subscriber?notice=#{notice}"
       end
     end
   end
