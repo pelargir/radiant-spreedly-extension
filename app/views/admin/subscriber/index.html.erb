@@ -18,7 +18,7 @@
         <td class="subscriber">
           <%= link_to s.email, subscriber_edit_url(:id => s.id) %>
         </td>
-        <td class="status">
+        <td class="<%= s.active? ? "" : "status" %>">
           <%= s.status %>
         </td>
         <td class="remove">
