@@ -9,7 +9,12 @@ From the target Radiant project:
   git clone git://github.com/pelargir/radiant-spreedly-extension.git vendor/extensions/spreedly
 
 Start your project, login as an admin, and visit the Extensions page. The Spreedly
-extension should be listed there.
+extension should be listed there. You should also see two new tabs near the top
+of the page, "Spreedly" and "Subscribers."
+
+Subscriber, login, and registration pages are added to your Radiant project during
+installation. Click on the "Pages" tab to view these. They can be modified as
+needed so long as the Radius tags and the slug are not disturbed.
 
 == Configuring Spreedly
 
@@ -44,14 +49,18 @@ if you'd prefer to bypass registration through the site.
 
 == Subscription Plans
 
-The extension only supports using one subscription plan at this time.
+The extension only supports using one subscription plan at a time. Select the
+subscription plan you would like to use from the "Spreedly" tab.
 
 == Protecting Pages
 
-To make a page accessible to subscribers only, set its page type to "Subscribers Only."
-The next time a user visits the page, they will be prompted to login or register.
+To make a page accessible to subscribers only, set its page type to "Paid Subscribers
+Only." The next time a user visits the page, they will be prompted to login or register.
 They won't be able to access the protected page until they have registered and paid
 for a subscription through Spreedly.
+
+Using a page type of "Subscribers Only" will only allow registered subscribers to
+access the page, regardless of whether they have paid through Spreedly or not.
 
 == Radius Tags
 
@@ -81,6 +90,10 @@ Renders a registration form for new subscribers.
 <r:flash:notices />
 Displays any pertinent user notices. For example, notification that the login failed
 or that the requested page can only be accessed by paid subscribers.
+
+== Future Development
+
+See the TODO file.
 
 == Resources
 
