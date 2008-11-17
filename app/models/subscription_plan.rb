@@ -1,5 +1,10 @@
 class SubscriptionPlan < ActiveResource::Base
-  self.site = "https://9d8d9521282877834841cb0ae33d41e88e1cfe25:X@spreedly.com/api/v3/test" # TODO
+  def self.refresh
+    token = Radiant::Config['spreedly.api_token']
+    mode = Radiant::Config['spreedly.mode'].downcase
+    self.site = "https://#{token}:X@spreedly.com/api/v3/#{mode}"
+  end
+  refresh
   
   def self.to_dropdown
     find(:all).collect { |e| [e.name, e.id] }

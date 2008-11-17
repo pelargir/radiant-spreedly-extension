@@ -26,7 +26,6 @@ class Subscriber < ActiveRecord::Base
   end
   
   def spreedly_configured?
-    # TODO this is yucky
     !Radiant::Config['spreedly.api_token'].blank? &&
     !Radiant::Config['spreedly.login_name'].blank? &&
     !Radiant::Config['spreedly.plan_id'].blank? &&

@@ -1,4 +1,10 @@
 class SubscriberResource < ActiveResource::Base
-  self.site = "https://9d8d9521282877834841cb0ae33d41e88e1cfe25:X@spreedly.com/api/v3/test" # TODO
   self.element_name = "subscriber"
+  
+  def self.refresh
+    token = Radiant::Config['spreedly.api_token']
+    mode = Radiant::Config['spreedly.mode'].downcase
+    self.site = "https://#{token}:X@spreedly.com/api/v3/#{mode}"
+  end
+  refresh
 end
