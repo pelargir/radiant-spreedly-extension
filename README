@@ -36,9 +36,10 @@ and set the Subscribers Changed Notification URL to:
 
 Spreedly must also be configured on your local site. Login as an admin and click the
 "Spreedly" tab, then click edit. Enter the your Spreedly account name and the ID of
-the subscription plan you want to use. Mode can be set to "Testing" when you're
-testing your site with Spreedly, but you should change it to "Production" when you
-actually want to start charging users for subscriptions.
+the subscription plan you want to use. Mode can be set to "Test" when you're
+testing your site with Spreedly, but you should change it to "Production" and clear
+the subscribers out of your database before you actually start charging users for
+real subscriptions.
 
 == Managing Subscribers
 
