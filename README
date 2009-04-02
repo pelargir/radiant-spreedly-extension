@@ -7,6 +7,10 @@ Adds support for paid subscriptions through Spreedly.
 From the target Radiant project:
   
   git clone git://github.com/pelargir/radiant-spreedly-extension.git vendor/extensions/spreedly
+  
+After installing the plugin run the migrations:
+
+  rake radiant:extensions:spreedly:migrate
 
 Start your project, login as an admin, and visit the Extensions page. The Spreedly
 extension should be listed there. You should also see two new tabs near the top

@@ -1,11 +1,17 @@
 module SpreedlyTags
   include Radiant::Taggable
-  include ActionController::UrlWriter
-  default_url_options[:host] = "localhost:3000"
   
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::AssetTagHelper
   include ActionView::Helpers::UrlHelper
+  include ActionController::UrlWriter
+  
+  def self.included(klass)
+    super
+    def klass.default_url_options
+      {:host => "localhost:3000"}
+    end
+  end
   
   tag "flash" do |tag|
     tag.expand

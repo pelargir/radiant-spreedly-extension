@@ -1,3 +1,3 @@
-class Admin::SubscriberController < Admin::AbstractModelController
+class Admin::SubscriberController < Admin::ResourceController
   model_class Subscriber
 end
