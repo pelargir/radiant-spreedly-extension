@@ -1,31 +1,4 @@
-<% if @subscriber.new_record? %>
-  <h1>New Subscriber</h1>
-<% else %>
-  <h1>Edit: <%= @subscriber.email %></h1>
-<% end %>
-
-<% form_tag do %>
-  <div class="form-area">
-    <div  id="subscriber_form_area">
-      <p class="email">
-        <label for="subscriber_email">Email:</label>
-        <%= text_field "subscriber", "email" %>
-      </p>
-      <p class="password">
-        <label for="subscriber_password">Password:</label>
-        <%= password_field "subscriber", "password" %>
-      </p>
-      <p class="status">
-        <label for="subscriber_status">Status:</label>
-        <%= @subscriber.status %>
-      </p>
-    </div>
-  </div>
-
-  <p class="buttons">
-    <%= save_model_button(@subscriber) %>
-    <%= save_model_and_continue_editing_button(@subscriber) %>
-    or 
-    <%= link_to "Cancel", subscriber_index_url %>
-  </p>
-<% end %>
+<h1>Edit Subscriber</h1>
+<% form_for @subscriber, :url => subscriber_update_path(@subscriber) do |f| %>
+  <%= render :partial => "form", :locals => {:f => f} %>
+<% end -%>

@@ -4,5 +4,5 @@
   API Token: <%= text_field_tag :api_token, Radiant::Config['spreedly.api_token'],:size => 50 %><br/>
   Site Name: <%= text_field_tag :site_name, Radiant::Config['spreedly.site_name'], :size => 20 %><br/>
   Plan: <%= select_tag :plan_id, options_for_select(SubscriptionPlan.to_dropdown, Radiant::Config['spreedly.plan_id'].to_i) if Radiant::Config['spreedly.site_name'].present? %><br/>
-  <%= submit_tag "Save" %> or <%= link_to "cancel", spreedly_index_url %>
+  <%= submit_tag "Save" %> or <%= link_to "cancel", spreedly_index_path %>
 <% end -%>

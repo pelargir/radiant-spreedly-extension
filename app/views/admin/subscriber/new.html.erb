@@ -1,0 +1,4 @@
+<h1>New Subscriber</h1>
+<% form_for :subscriber, :url => subscriber_create_path do |f| %>
+  <%= render :partial => "form", :locals => {:f => f} %>
+<% end -%>

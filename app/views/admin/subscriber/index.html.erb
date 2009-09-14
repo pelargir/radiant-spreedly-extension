@@ -17,7 +17,7 @@
     <% @subscribers.each do |s| %>
       <tr class="node level-1">
         <td class="subscriber">
-          <%= link_to s.email, subscriber_edit_url(:id => s.id) %>
+          <%= link_to s.email, subscriber_edit_path(s) %>
         </td>
         <td class="spreedly">
           <%= link_to "View", s.spreedly_account_url %>
@@ -26,7 +26,7 @@
           <%= s.status %>
         </td>
         <td class="remove">
-          <%= link_to "remove", subscriber_remove_url(:id => s.id) %>
+          <%= link_to "remove", subscriber_remove_path(s) %>
         </td>
       </tr>
     <% end %>
@@ -34,4 +34,4 @@
 
 </table>
 
-<p><%= link_to "new", subscriber_new_url %></p>
+<p><%= link_to "new", subscriber_new_path %></p>

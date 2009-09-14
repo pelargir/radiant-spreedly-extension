@@ -12,10 +12,9 @@
  </tbody>
 </table>
 
-<% form_tag do %>
+<% form_for :subscriber, :url => subscriber_destroy_path(@subscriber), :html => {:method => :delete} do %>
  <p class="buttons">
-   <input class="button" type="submit" value="Delete Subscriber"/>
-   or
-   <%= link_to 'Cancel', subscriber_index_url %>
+   <input class="button" type="submit" value="Delete Subscriber"/> or
+   <%= link_to "cancel", subscriber_index_path %>
  </p>
 <%- end -%>

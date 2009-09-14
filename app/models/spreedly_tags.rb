@@ -3,7 +3,7 @@ module SpreedlyTags
   include ActionController::UrlWriter
   
   # TODO be smarter about how this gets set
-  default_url_options[:host] = APP_HOST = "localhost:3000"
+  default_url_options[:host] = "localhost:3000"
   
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::AssetTagHelper
@@ -27,7 +27,7 @@ module SpreedlyTags
   end
   
   tag "subscriber:logout" do |tag|
-    link_to "Logout", subscriber_actions_logout_url
+    link_to "Logout", subscriber_actions_logout_path
   end
   
   tag "subscriber:username" do |tag|
@@ -60,7 +60,7 @@ module SpreedlyTags
   
   tag "subscriber:login:form" do |tag|
     requested_url = tag.locals.page.request.parameters["requested_url"]
-    "<form action=\"#{subscriber_actions_login_url}\" method=\"post\">" <<
+    "<form action=\"#{subscriber_actions_login_path}\" method=\"post\">" <<
     "<input type=\"hidden\" name=\"requested_url\" value=\"#{requested_url}\" />" <<
     "Email: <input type=\"text\" name=\"email\" size=\"20\" /><br/>" <<
     "Password: <input type=\"password\" name=\"password\" size=\"20\" /><br/>" <<
