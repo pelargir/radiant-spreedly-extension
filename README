@@ -20,6 +20,19 @@ Subscriber, login, and registration pages are added to your Radiant project duri
 installation. Click on the "Pages" tab to view these. They can be modified as
 needed so long as the Radius tags and the slug are not disturbed.
 
+== Upgrading from v1.0 to v1.1
+
+Version 1.0 of the Spreedly extension runs against the Spreedly API v3. Version 1.1
+of the extension runs against API v4. To upgrade from 1.0 to 1.1, remove the old
+extension completely and install the new one. Then, visit the "Spreedly" tab in the
+admin and set the "Site Name" to your Spreedly site name. Save and revisit the
+tab to select a plan from the "Plan" drop-down. All done!
+
+Note: There is no longer a drop-down to toggle between your Spreedly production and
+test sites. This is because v4 of the API uses site names to distinguish between
+these sites. By configuring with your test site name, you will by definition be
+using your test site. The same goes for your production site name.
+
 == Configuring Spreedly
 
 If you haven't registered with Spreedly, go ahead and sign up for an account. Once

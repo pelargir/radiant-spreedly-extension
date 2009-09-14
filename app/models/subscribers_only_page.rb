@@ -5,7 +5,7 @@ class SubscribersOnlyPage < Page
   }
   
   def process(request, response)
-    if request.cookies["subscriber"].empty?
+    if request.cookies["subscriber"].blank?
       not_a_subscriber(request, response)
     else
       super

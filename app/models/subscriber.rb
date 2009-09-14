@@ -10,26 +10,21 @@ class Subscriber < ActiveRecord::Base
   
   def spreedly_url
     if spreedly_configured?
-      login_name = Radiant::Config['spreedly.login_name']
+      site_name = Radiant::Config['spreedly.site_name']
       plan_id = Radiant::Config['spreedly.plan_id']
-      "https://spreedly.com/#{login_name}#{mode_for_url}/subscribers/#{id}/subscribe/#{plan_id}/#{email}-#{id}"
+      "https://spreedly.com/#{site_name}/subscribers/#{id}/subscribe/#{plan_id}/#{email}-#{id}"
     end
   end
   
-  def mode_for_url
-    Radiant::Config['spreedly.mode'] == "Test" ? "-test" : ""
-  end
-  
   def spreedly_account_url
-    mode = Radiant::Config['spreedly.mode'].downcase
-    "https://spreedly.com/#{mode}/subscribers/#{id}"
+    site_name = Radiant::Config['spreedly.site_name']
+    "https://spreedly.com/#{site_name}/subscribers/#{id}"
   end
   
   def spreedly_configured?
     !Radiant::Config['spreedly.api_token'].blank? &&
-    !Radiant::Config['spreedly.login_name'].blank? &&
-    !Radiant::Config['spreedly.plan_id'].blank? &&
-    !Radiant::Config['spreedly.mode'].blank?
+    !Radiant::Config['spreedly.site_name'].blank? &&
+    !Radiant::Config['spreedly.plan_id'].blank?
   end
   
   def status

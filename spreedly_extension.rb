@@ -2,7 +2,7 @@
 # require_dependency 'application'
 
 class SpreedlyExtension < Radiant::Extension
-  version "1.0"
+  version "1.1"
   description "Adds support for paid subscriptions through Spreedly."
   url "http://dev.radiantcms.org/radiant/browser/trunk/extensions/spreedly"
   
@@ -32,4 +32,4 @@ class SpreedlyExtension < Radiant::Extension
   end
 end
 
-# Soli Deo Gloria!
+# SDG

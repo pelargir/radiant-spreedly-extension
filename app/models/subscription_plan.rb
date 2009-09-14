@@ -1,8 +1,8 @@
 class SubscriptionPlan < ActiveResource::Base
   def self.refresh
     token = Radiant::Config['spreedly.api_token']
-    mode = (Radiant::Config['spreedly.mode'] || 'test').downcase
-    self.site = "https://#{token}:X@spreedly.com/api/v3/#{mode}"
+    site_name = Radiant::Config['spreedly.site_name']
+    self.site = "https://#{token}:X@spreedly.com/api/v4/#{site_name}"
   end
   refresh
   

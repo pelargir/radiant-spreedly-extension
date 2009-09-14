@@ -1,3 +1,4 @@
 - Split out subscription tags into separate form fields
 - Run through action, but render a Radiant page (see comments extension for @page.render)
 - Store subscribers in Spreedly itself (instead of a local table)
+- Figure out a better way to set default_url_options in spreedly_tags.rb
