@@ -13,9 +13,8 @@ class PaidSubscribersOnlyPage < SubscribersOnlyPage
       if s && s.active?
         super
       else
-        response.headers["Status"] = "302"
         notice = "The page you requested is for paid subscribers only. Please subscribe."
-        response.headers["Location"] = "/subscriber?notice=#{notice}"
+        response.redirect "/subscriber?notice=#{notice}", 302
       end
     end
   end
@@ -23,4 +22,5 @@ class PaidSubscribersOnlyPage < SubscribersOnlyPage
   def cache?
     false
   end
+  
 end
